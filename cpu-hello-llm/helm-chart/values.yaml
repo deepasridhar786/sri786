@@ -1,0 +1,13 @@
+replicaCount: 1
+
+backend:
+  image: hello-backend    # built locally below
+  tag: latest
+  port: 8000
+
+frontend:
+  image: hello-frontend   # built locally below
+  tag: latest
+  port: 80
+
+serviceType: ClusterIP   # change to LoadBalancer on cloud

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cpu-hello-llm
+description: Minimal CPU-only frontend+backend demo deployable on Docker Desktop Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

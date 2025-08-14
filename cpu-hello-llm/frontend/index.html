@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>CPU Hello LLM</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 720px; margin: 40px auto; }
+    textarea { width: 100%; height: 120px; }
+    button { padding: 10px 16px; margin-top: 8px; }
+    pre { background: #f7f7f9; padding: 12px; border-radius: 8px; }
+  </style>
+  <script>
+    async function sendChat() {
+      const prompt = document.getElementById('prompt').value;
+      const backendBase = window.location.origin.replace(/:\d+$/, ':8000'); // expect port-forward 8000
+      const url = backendBase + '/chat';
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById('out').textContent = data.reply || JSON.stringify(data, null, 2);
+    }
+  </script>
+</head>
+<body>
+  <h1>CPU Hello LLM</h1>
+  <p>Type a prompt and click Send. Backend is a CPU-only FastAPI service.</p>
+  <textarea id="prompt" placeholder="Say something..."></textarea><br/>
+  <button onclick="sendChat()">Send</button>
+  <h3>Response</h3>
+  <pre id="out">(waiting)</pre>
+</body>
+</html>
